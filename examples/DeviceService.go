@@ -6,10 +6,10 @@ import (
 	"log"
 	"net/http"
 
-	goonvif "github.com/use-go/onvif"
-	"github.com/use-go/onvif/device"
-	"github.com/use-go/onvif/gosoap"
-	"github.com/use-go/onvif/xsd/onvif"
+	"github.com/zgwit/gonvif"
+	"github.com/zgwit/gonvif/device"
+	"github.com/zgwit/gonvif/gosoap"
+	"github.com/zgwit/gonvif/xsd/onvif"
 )
 
 const (
@@ -27,7 +27,7 @@ func readResponse(resp *http.Response) string {
 
 func main() {
 	//Getting an camera instance
-	dev, err := goonvif.NewDevice(goonvif.DeviceParams{
+	dev, err := gonvif.NewDevice(gonvif.DeviceParams{
 		Xaddr:      "192.168.13.14:80",
 		Username:   login,
 		Password:   password,

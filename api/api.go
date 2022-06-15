@@ -3,6 +3,7 @@ package api
 import (
 	"errors"
 	"fmt"
+	"github.com/zgwit/gonvif"
 	"io/ioutil"
 	"net/http"
 	"path"
@@ -12,10 +13,9 @@ import (
 
 	"github.com/beevik/etree"
 	"github.com/gin-gonic/gin"
-	"github.com/use-go/onvif"
-	"github.com/use-go/onvif/gosoap"
-	"github.com/use-go/onvif/networking"
-	wsdiscovery "github.com/use-go/onvif/ws-discovery"
+	"github.com/zgwit/gonvif/gosoap"
+	"github.com/zgwit/gonvif/networking"
+	wsdiscovery "github.com/zgwit/gonvif/ws-discovery"
 )
 
 func RunApi() {
@@ -144,7 +144,7 @@ func callNecessaryMethod(serviceName, methodName, acceptedData, username, passwo
 
 	soap := gosoap.NewEmptySOAP()
 	soap.AddStringBodyContent(*resp)
-	soap.AddRootNamespaces(onvif.Xlmns)
+	soap.AddRootNamespaces(gonvif.Xlmns)
 	soap.AddWSSecurity(username, password)
 
 	servResp, err := networking.SendSoap(new(http.Client), endpoint, soap.String())
@@ -161,7 +161,7 @@ func callNecessaryMethod(serviceName, methodName, acceptedData, username, passwo
 }
 
 func getEndpoint(service, xaddr string) (string, error) {
-	dev, err := onvif.NewDevice(onvif.DeviceParams{Xaddr: xaddr})
+	dev, err := gonvif.NewDevice(gonvif.DeviceParams{Xaddr: xaddr})
 	if err != nil {
 		return "", err
 	}

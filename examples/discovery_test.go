@@ -1,7 +1,8 @@
-package example
+package main
 
 import (
 	"encoding/json"
+	"github.com/zgwit/gonvif"
 	"io/ioutil"
 	"log"
 	"path"
@@ -10,22 +11,21 @@ import (
 	"testing"
 
 	"github.com/beevik/etree"
-	"github.com/use-go/onvif"
-	"github.com/use-go/onvif/device"
-	discover "github.com/use-go/onvif/ws-discovery"
+	"github.com/zgwit/gonvif/device"
+	discover "github.com/zgwit/gonvif/ws-discovery"
 )
 
 func TestGetAvailableDevicesAtSpecificEthernetInterface(t *testing.T) {
 
 	// client()
 	// runDiscovery("en0")
-	s := onvif.GetAvailableDevicesAtSpecificEthernetInterface("en0")
+	s := gonvif.GetAvailableDevicesAtSpecificEthernetInterface("en0")
 
 	log.Printf("%s", s)
 }
 
 func client() {
-	dev, err := onvif.NewDevice(onvif.DeviceParams{Xaddr: "192.168.3.10", Username: "admin", Password: "zsyy12345"})
+	dev, err := gonvif.NewDevice(gonvif.DeviceParams{Xaddr: "192.168.3.10", Username: "admin", Password: "zsyy12345"})
 	if err != nil {
 		panic(err)
 	}
